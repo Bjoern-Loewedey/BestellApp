@@ -1,0 +1,30 @@
+.ratingComments {
+    max-height: 200px; /* Maximale Höhe für die Bewertungen */
+    overflow-y: auto; /* Ermöglicht vertikales Scrollen */
+    border: 1px solid #ccc; /* Schlanke Umrandung */
+    padding: 10px; /* Innenabstand */
+    margin-top: 10px; /* Abstand zum oberen Element */
+    background-color: #f9f9f9; /* Hintergrundfarbe */
+}
+.ratingComments ul {
+    list-style-type: none; /* Keine Aufzählungszeichen */
+    padding: 0; /* Kein Innenabstand */
+    margin: 0; /* Kein Außenabstand */
+}
+#rating-container {
+    margin-top: 20px;
+}
+#rating-container input,
+#rating-container textarea {
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+}
+#previous-ratings {
+    list-style-type: none;
+    padding: 0;
+}
+#previous-ratings li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
