@@ -19,6 +19,7 @@ const DELIVERY_COST = 5.0;
 window.onload = () => {
 
     console.log('window.onload')
+    console.log('kgg')
 
     displayDishes(dishes); // Gerichte anzeigen
     updateCartDisplay(); // Warenkorb anzeigen

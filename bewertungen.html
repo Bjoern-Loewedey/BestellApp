@@ -1,40 +1,43 @@
-   <!DOCTYPE html>
-   <html lang="de">
-   <head>
-       <meta charset="UTF-8">
-       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <title>Bewertungen</title>
-       <link rel="stylesheet" href="styles.css">
-       <link rel="stylesheet" href="bewertungenStyles.css">
-    
-   </head>
-   <body>
-       <div class="screen">
-           <header class="header"></header>
-           <h1>Restaurant Bestellsystem</h1>
-           <nav>
-           <a href="./index.html"><button id="rating-page-button">Essenskarte anzeigen</button></a> <!-- Button für die Bewertungen -->
-           <button id="drinks-button-dishes">Getränkekarte anzeigen</button>
-           </nav>
-           <h1>Bewertungen</h1>
-           <div id="average-rating-container" style="display: none;">
-    <h2>Durchschnittsbewertung: <span id="average-rating-stars"></span></h2>
-</div>
-           <div id="rating-container">
-               <h2>Bewertung abgeben</h2>
-               <input type="text" id="name" placeholder="Ihr Name">
-               <textarea id="comment" placeholder="Ihr Kommentar"></textarea>
-               <input type="number" id="stars" min="1" max="5" placeholder="Bewertung (1-5)">
-               <button id="submit-rating">Abgeben</button>
-               <h3>Vorherige Bewertungen</h3>
-               <div class="ratingComments">
-               <ul id="previous-ratings"></ul>
-               </div>
-           </div>
-           <footer class="footer">FOOTER</footer>
-       </div>
-       <script src="bewertungen.js"></script>
-       <script src="index.html"></script>
-   </body>
-   </html>
-   
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bewertungen</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="bewertungenStyles.css">
+
+</head>
+
+<body>
+    <div class="screen">
+        <header class="header"></header>
+        <h1>Restaurant Bestellsystem</h1>
+        <nav>
+            <a href="./index.html"><button id="rating-page-button">Essenskarte anzeigen</button></a>
+            <!-- Button für die Bewertungen -->
+            <button id="drinks-button-dishes">Getränkekarte anzeigen</button>
+        </nav>
+        <h1>Bewertungen</h1>
+        <div id="average-rating-container" style="display: none;">
+            <h2>Durchschnittsbewertung: <span id="average-rating-stars"></span></h2>
+        </div>
+        <div id="rating-container">
+            <h2>Bewertung abgeben</h2>
+            <input type="text" id="name" placeholder="Ihr Name">
+            <textarea id="comment" placeholder="Ihr Kommentar"></textarea>
+            <input type="number" id="stars" min="1" max="5" placeholder="Bewertung (1-5)">
+            <button id="submit-rating">Abgeben</button>
+            <h3>Vorherige Bewertungen</h3>
+            <div class="ratingComments">
+                <ul id="previous-ratings"></ul>
+            </div>
+        </div>
+        <footer class="footer">FOOTER</footer>
+    </div>
+    <script src="bewertungen.js"></script>
+    <script src="index.html"></script>
+</body>
+
+</html>
