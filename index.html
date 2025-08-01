@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Bestellsystem</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Economica:ital,wght@0,400;0,700;1,400;1,700&family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Outfit:wght@100..900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Pacifico&family=Playwrite+IN:wght@100..400&family=Raleway&family=Roboto+Slab&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="screen">
+        <header class="header"></header>
+        <div class="mainBackground">
+            <h1>Restaurant Bestellsystem</h1>
+
+
+
+            <!-- Durchschnittsbewertung -->
+            <div id="average-rating-container" style="display: none;">
+                <h2>Durchschnittsbewertung: <span id="average-rating-stars"></span></h2>
+
+            </div>
+            <nav>
+                <button id="home-button-dishes">Zur Hauptseite - noch INAKTIV</button>
+                <button id="food-button-drinks">Gerichte anzeigen</button>
+                <button id="drinks-button-dishes">Getränkekarte anzeigen</button>
+                <a href="./bewertungen.html"><button id="rating-page-button">Bewertungen anzeigen / abgeben</button></a>
+                <!-- Button für die Bewertungen -->
+
+            </nav>
+
+            <main>
+
+                <div id="table-container"></div>
+                <div id="drink-table-container" style="display: none;"></div>
+
+                <div class="cart-section">
+                    <h2>Warenkorb</h2>
+                    <ul id="cart-list"></ul>
+                </div>
+
+
+                <div id="modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <p>Danke für Ihre Bestellung!</p>
+                    </div>
+                </div>
+                <div id="rating-container" style="display:none;">
+                    <h2>Bewertung abgeben</h2>
+                    <input type="text" id="name" placeholder="Ihr Name">
+                    <textarea id="comment" placeholder="Ihr Kommentar"></textarea>
+                    <input type="number" id="stars" min="1" max="5" placeholder="Bewertung (1-5)">
+                    <button id="submit-rating">Abgeben</button>
+                    <h3>Vorherige Bewertungen</h3>
+                    <ul id="previous-ratings"></ul>
+                </div>
+            </main>
+        </div>
+        <footer class="footer">FOOTER</footer>
+    </div>
+    <script src="script.js"></script>
+    <script src="bewertungen.js"></script>
+
+</body>
+
+</html>
