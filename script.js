@@ -17,6 +17,9 @@ const dishes = [
 let cart = []; // Globaler Warenkorb
 const DELIVERY_COST = 5.0;
 window.onload = () => {
+
+    console.log('window.onload')
+
     displayDishes(dishes); // Gerichte anzeigen
     updateCartDisplay(); // Warenkorb anzeigen
     // Event Listener für die Navigation zwischen Gerichten und Getränken
