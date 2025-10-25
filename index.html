@@ -4,52 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Bestellsystem</title>
+    <title>Bestellbude</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Economica:ital,wght@0,400;0,700;1,400;1,700&family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Outfit:wght@100..900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Pacifico&family=Playwrite+IN:wght@100..400&family=Raleway&family=Roboto+Slab&display=swap"
         rel="stylesheet">
+    <link rel="shortcut icon" href="./img/bestellbude_icon.ico" type="image/x-icon">
+    <script type="module" src="script.js"></script>
 </head>
 
-<body>
+<body id="home">
+
+    <header class="header">
+        <div class="shopping-cart-img">
+            <div class="shopping-cart" data-href="cart.html" id="shoppingcart">
+                <img src="img/shoppingCard.jpg" alt="Einkaufswagen" />
+            </div>
+        </div>
+    </header>
+
     <div class="screen">
-        <header class="header"></header>
-        <div class="mainBackground">
-            <h1>Restaurant Bestellsystem</h1>
+        <imageUnderTheHeader class="mainBackground"></imageUnderTheHeader>
+        <div class="sreenMediaQuery">
 
+            <div class="companyName">
 
+                <div class="nameAndLogo">
 
-            <!-- Durchschnittsbewertung -->
+                    <div class="Restaurantname">
+                        <h1>Bestellbude</h1>
+                    </div>
+                    <img src="./img/Logo-Bestellbude.jpeg" class="BestellbudeLogo">
+
+                </div>
+
+            </div>
+
             <div id="average-rating-container" style="display: none;">
                 <h2>Durchschnittsbewertung: <span id="average-rating-stars"></span></h2>
 
             </div>
+
             <nav>
-                <button id="home-button-dishes">Zur Hauptseite - noch INAKTIV</button>
+
                 <button id="food-button-drinks">Gerichte anzeigen</button>
                 <button id="drinks-button-dishes">Getränkekarte anzeigen</button>
-                <a href="./bewertungen.html"><button id="rating-page-button">Bewertungen anzeigen / abgeben</button></a>
-                <!-- Button für die Bewertungen -->
+                <a href="./bewertungen.html"><button id="rating-page-button">Bewertungen anzeigen /
+                        abgeben</button></a>
 
             </nav>
 
             <main>
-
-                <div id="table-container"></div>
-                <div id="drink-table-container" style="display: none;"></div>
+                <div id="dishes-table-container" class="table-container-food visible"></div>
+                <div id="drink-table-container" class="table-container-food"></div>
 
                 <div class="cart-section">
-                    <h2>Warenkorb</h2>
+                    <h3>Warenkorbinnhalt </h3>
                     <ul id="cart-list"></ul>
                 </div>
-
 
                 <div id="modal" class="modal">
                     <div class="modal-content">
                         <span class="close-button">&times;</span>
-                        <p>Danke für Ihre Bestellung!</p>
+                        <p>Danke für Ihre Bestellung! Ihre Lieferung ist unterwegs</p>
                     </div>
                 </div>
                 <div id="rating-container" style="display:none;">
@@ -62,11 +81,16 @@
                     <ul id="previous-ratings"></ul>
                 </div>
             </main>
+
         </div>
-        <footer class="footer">FOOTER</footer>
+        <footer class="footer">
+            <p>&copy; 2025 Björn Löwedey</p>
+        </footer>
     </div>
+
     <script src="script.js"></script>
     <script src="bewertungen.js"></script>
+    <script src="cart.html"></script>
 
 </body>
 

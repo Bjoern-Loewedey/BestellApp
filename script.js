@@ -1,106 +1,147 @@
-const drinks = [
-    { name: "Coca-Cola", description: "Klassische Cola mit spritziger Frische.", price: 2.50 },
-    { name: "Fanta", description: "Fruchtiger Limonadegeschmack in jedem Schluck.", price: 2.50 },
-    { name: "Sprite", description: "Erfrischendes Zitrusgetränk, ideal für heiße Tage.", price: 2.50 },
-    { name: "Mineralwasser", description: "Kohlensäurehaltiges Wasser - perfekt für jeden Anlass.", price: 1.50 },
-    { name: "Orangensaft", description: "Frisch gepresster Orangensaft, voller Vitamin C.", price: 3.00 },
-    { name: "Apfelsaft", description: "Süßer, fruchtiger Apfelsaft.", price: 3.00 }
-];
-const dishes = [
-    { name: "Margherita Pizza", description: "Klassische Pizza mit frischen Tomaten, Mozzarella und Basilikum.", price: 8.50 },
-    { name: "Pasta Carbonara", description: "Hausgemachte Pasta mit Ei, Käse, Speck und schwarzem Pfeffer.", price: 9.90 },
-    { name: "Caesar Salad", description: "Frischer Salat mit Romanasalat, Croutons, Parmesan und Caesar-Dressing.", price: 7.00 },
-    { name: "Schweinebraten", description: "Zartes Schweinefleisch, langsam gegart, serviert mit Knödeln und Sauerkraut.", price: 12.50 },
-    { name: "Lasagne", description: "Hausgemachte Lasagne mit Fleischsoße und Käseüberbacken.", price: 10.00 },
-    { name: "Tiramisu", description: "Klassisches italienisches Dessert mit Kaffee, Mascarpone und Kakao.", price: 5.50 }
-];
-let cart = []; // Globaler Warenkorb
+import { drinks } from './drinks.js';
+import { dishes } from './dishes.js';
+
+window.cart = window.cart || [];
 const DELIVERY_COST = 5.0;
+
+const foodCategories = [
+    { id: 'dishes-table-container', name: 'Gerichte', items: dishes, },
+    { id: 'drink-table-container', name: 'Getränke', items: drinks, }
+]
+
+const showCategory = (id) => {
+    document.getElementById(id).classList.add('visible');
+    const otherCategory = foodCategories.find(cat => cat.id !== id);
+    document.getElementById(otherCategory.id).classList.remove('visible');
+}
+
 window.onload = () => {
+    if (window.location.href.includes('index.html')) {
+        updateDisplayFoodItems()
 
-    console.log('window.onload')
-    console.log('kgg')
+    }
+    updateCartDisplay();
+    document.getElementById('drinks-button-dishes')?.addEventListener('click', () => {
+        showCategory(foodCategories[1].id);
+    });
+    document.getElementById('food-button-drinks')?.addEventListener('click', () => {
+        showCategory(foodCategories[0].id);
+    });
 
-    displayDishes(dishes); // Gerichte anzeigen
-    updateCartDisplay(); // Warenkorb anzeigen
-    // Event Listener für die Navigation zwischen Gerichten und Getränken
-    document.getElementById('drinks-button-dishes').addEventListener('click', () => {
-        displayDrinks(drinks); // Getränkekarte anzeigen
+    document.querySelector(".close-button")?.addEventListener("click", () => {
+        document.getElementById("modal").style.display = "none";
     });
-    document.getElementById('food-button-drinks').addEventListener('click', () => {
-        displayDishes(dishes); // Zurück zu Gerichten
-    });
-    document.getElementById('home-button-dishes').addEventListener('click', () => {
-        alert("Zur Hauptseite navigieren"); // Hier kannst du die Hauptseite zu einer anderen Funktion oder Seite weiterleiten
-    });
-    document.querySelector(".close-button").addEventListener("click", () => {
+    window.addEventListener("click", event => {
         const modal = document.getElementById("modal");
-        modal.style.display = "none";
+        if (event.target === modal) modal.style.display = "none";
     });
-    window.addEventListener("click", (event) => {
-        const modal = document.getElementById("modal");
-        if (event.target === modal) {
-            modal.style.display = "none";
+    const shoppingcart = document.getElementById('shoppingcart')
+    shoppingcart?.addEventListener("click", event => {
+        const cartItemParameters = (window.cart || []).map(item => `${item.id}=${item.quantity}`).join('&');
+        var href = document.getElementById('shoppingcart').getAttribute("data-href");
+
+        if (href) {
+            const hasCartItems = cartItemParameters.length > 0;
+            const newPath = hasCartItems ? `${href}?${cartItemParameters}` : href;
+            location.href = newPath
+            event.preventDefault();
         }
     });
 
-};
 
-function displayDishes(dishes) {
-    const tableContainer = document.getElementById('table-container');
-    tableContainer.innerHTML = ''; // Inhalt zurücksetzen
+    initUrlParamsToCart();
+}
 
+const initUrlParamsToCart = () => {
+    const currentUrl = window.location.href;
+    const allUrlParams = currentUrl.split('?')[1];
+    console.log('allUrlParams', allUrlParams)
+    if (!allUrlParams) {
+        updateCartDisplay();
+        return
+    };
+
+    const urlParams = new URLSearchParams(allUrlParams);
+    const cart = window.cart || [];
+    for (const [id, quantity] of urlParams.entries()) {
+        const dish = dishes.find(d => d.id === id);
+        const drink = drinks.find(d => d.id === id);
+        if (dish) {
+            cart.push({ id: dish.id, name: dish.name, price: dish.price, quantity: parseInt(quantity) });
+        } else if (drink) {
+            cart.push({ id: drink.id, name: drink.name, price: drink.price, quantity: parseInt(quantity) });
+        }
+        window.cart = cart
+    }
+
+    updateCartDisplay();
+}
+
+
+const updateDisplayFoodItems = () => {
+    foodCategories.forEach(category => {
+        displayFoodItem(category.id, category.items);
+    })
+}
+
+const displayFoodItem = (id, items) => {
+
+    const tableContainer = document.getElementById(id);
+    tableContainer.innerHTML = '';
     const containerDiv = document.createElement('div');
-    containerDiv.classList.add('table-container'); // Füge die Klasse hinzu
+    containerDiv.classList.add('table-container');
     const table = document.createElement('table');
     table.classList.add('dish-table');
-    createTableHeader(table);
+    createFoodItemTableHeader(table);
     const tableBody = document.createElement('tbody');
-    dishes.forEach(dish => tableBody.appendChild(createDishRow(dish)));
+    items.forEach(dish => tableBody.appendChild(createFoodItemRow(dish)));
     table.appendChild(tableBody);
     containerDiv.appendChild(table);
-    tableContainer.appendChild(containerDiv); // Füge den Container in die Hauptansicht ein
-    // Zeige die Gerichte an und verstecke die Getränkekarte
-    document.getElementById("table-container").style.display = "block";
-    document.getElementById("drink-table-container").style.display = "none";
-}
-function createTableHeader(table) {
+    tableContainer.appendChild(containerDiv);
+    // document.getElementById("table-container").style.display = "block";
+    // document.getElementById("drink-table-container").style.display = "none";
+};
+
+const createFoodItemTableHeader = table => {
     const tableHeader = document.createElement('thead');
     const headerRow = document.createElement('tr');
     headerRow.classList.add('table-header');
-    const headers = ['Gericht', 'Beschreibung', 'Preis', 'Zum Warenkorb hinzufügen'];
-    headers.forEach(headerText => {
+    ['Gericht', 'Beschreibung', 'Preis', 'Zum Warenkorb hinzufügen'].forEach(headerText => {
         const th = document.createElement('th');
         th.textContent = headerText;
         headerRow.appendChild(th);
     });
     tableHeader.appendChild(headerRow);
     table.appendChild(tableHeader);
-}
-function createDishRow(dish) {
+};
+
+const createFoodItemRow = dish => {
     const row = document.createElement('tr');
     row.innerHTML = `
         <td>${dish.name}</td>
         <td>${dish.description}</td>
         <td>€${dish.price.toFixed(2)}</td>
-        <td><button class="order-button" onclick="orderDish('${dish.name}', ${dish.price})">Bestellen</button></td>
+        <td><button class="order-button" onclick="orderItem('${dish.id}','${dish.name}', ${dish.price})">Bestellen</button></td>
     `;
     return row;
-}
-function orderDish(name, price) {
-    updateCart(name, price);
-    updateCartDisplay();
-}
-function updateCart(name, price) {
-    const existingDish = cart.find(item => item.name === name);
+};
+
+
+const updateCart = (id, name, price) => {
+    const cart = window.cart || [];
+    const existingDish = cart.find(item => item.id === id);
     if (existingDish) {
         existingDish.quantity += 1;
     } else {
-        cart.push({ name, price, quantity: 1 });
+        cart.push({ id, name, price, quantity: 1 });
+        window.cart = cart;
     }
-}
-function updateCartDisplay() {
+};
+
+const updateCartDisplay = () => {
+    const cart = window.cart || [];
     const cartList = document.getElementById('cart-list');
+    if (!cartList) return;
     cartList.innerHTML = '';
     if (cart.length === 0) {
         cartList.innerHTML = '<li>Warenkorb ist leer</li>';
@@ -110,8 +151,9 @@ function updateCartDisplay() {
         });
         appendTotalPrice(cartList);
     }
-}
-function createCartItem(item) {
+};
+
+const createCartItem = item => {
     const listItem = document.createElement('li');
     listItem.innerHTML = `
         <div class="orderList">
@@ -126,8 +168,9 @@ function createCartItem(item) {
         </div>
     `;
     return listItem;
-}
-function appendTotalPrice(cartList) {
+};
+
+const appendTotalPrice = cartList => {
     const total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     const totalWithDelivery = total + DELIVERY_COST;
     const totalPrice = document.createElement('h4');
@@ -147,18 +190,9 @@ function appendTotalPrice(cartList) {
     orderButtonContainer.classList.add('order-button-container');
     orderButtonContainer.appendChild(orderButton);
     cartList.appendChild(orderButtonContainer);
-}
-function changeQuantity(name, change) {
-    const item = cart.find(i => i.name === name);
-    if (item) {
-        item.quantity += change;
-        if (item.quantity <= 0) {
-            cart = cart.filter(i => i.name !== name);
-        }
-        updateCartDisplay();
-    }
-}
-function submitOrder() {
+};
+
+const submitOrder = () => {
     if (cart.length === 0) {
         alert("Warenkorb ist leer. Bitte zuerst ein Gericht oder Getränk bestellen.");
         return;
@@ -167,50 +201,29 @@ function submitOrder() {
     modal.style.display = "block";
     cart = [];
     updateCartDisplay();
-}
-function displayDrinks(drinks) {
-    const drinkTableContainer = document.getElementById('drink-table-container');
-    drinkTableContainer.innerHTML = '';
+    document.querySelector(".close-button").onclick = () => {
+        modal.style.display = "none";
+    };
+    window.onclick = (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+};
 
-    const containerDiv = document.createElement('div');
-    containerDiv.classList.add('table-container');
-    const table = document.createElement('table');
-    table.classList.add('dish-table');
-    createDrinkTableHeader(table);
-    const tableBody = document.createElement('tbody');
-    drinks.forEach(drink => tableBody.appendChild(createDrinkRow(drink)));
-    table.appendChild(tableBody);
-    containerDiv.appendChild(table);
-    drinkTableContainer.appendChild(containerDiv);
-    // Zeige die Getränkekarte an und verstecke die Gerichte
-    document.getElementById("drink-table-container").style.display = "block";
-    document.getElementById("table-container").style.display = "none";
-}
-function createDrinkTableHeader(table) {
-    const tableHeader = document.createElement('thead');
-    const headerRow = document.createElement('tr');
-    headerRow.classList.add('table-header');
-    const headers = ['Getränk', 'Beschreibung', 'Preis', 'Zum Warenkorb hinzufügen'];
-    headers.forEach(headerText => {
-        const th = document.createElement('th');
-        th.textContent = headerText;
-        headerRow.appendChild(th);
-    });
-    tableHeader.appendChild(headerRow);
-    table.appendChild(tableHeader);
-}
-function createDrinkRow(drink) {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-        <td>${drink.name}</td>
-        <td>${drink.description}</td>
-        <td>€${drink.price.toFixed(2)}</td>
-        <td><button class="order-button" onclick="orderDrink('${drink.name}', ${drink.price})">Bestellen</button></td>
-    `;
-    return row;
-}
-function orderDrink(name, price) {
-    updateCart(name, price);
+window.orderItem = (id, name, price) => {
+    updateCart(id, name, price);
     updateCartDisplay();
-}
+};
 
+window.changeQuantity = (name, change) => {
+    const item = cart.find(i => i.name === name);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            cart = cart.filter(i => i.name !== name);
+            window.cart = cart;
+        }
+        updateCartDisplay();
+    }
+};

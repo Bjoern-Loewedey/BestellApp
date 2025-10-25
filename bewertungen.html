@@ -4,40 +4,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bewertungen</title>
+    <title>Bestellbude</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="bewertungenStyles.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Economica:ital,wght@0,400;0,700;1,400;1,700&family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Outfit:wght@100..900&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Pacifico&family=Playwrite+IN:wght@100..400&family=Raleway&family=Roboto+Slab&display=swap"
+        rel="stylesheet">
+    <link rel="shortcut icon" href="./img/bestellbude_icon.ico" type="image/x-icon">
 </head>
 
 <body>
     <div class="screen">
         <header class="header"></header>
-        <h1>Restaurant Bestellsystem</h1>
-        <nav>
-            <a href="./index.html"><button id="rating-page-button">Essenskarte anzeigen</button></a>
-            <!-- Button für die Bewertungen -->
-            <button id="drinks-button-dishes">Getränkekarte anzeigen</button>
-        </nav>
-        <h1>Bewertungen</h1>
-        <div id="average-rating-container" style="display: none;">
-            <h2>Durchschnittsbewertung: <span id="average-rating-stars"></span></h2>
-        </div>
-        <div id="rating-container">
-            <h2>Bewertung abgeben</h2>
-            <input type="text" id="name" placeholder="Ihr Name">
-            <textarea id="comment" placeholder="Ihr Kommentar"></textarea>
-            <input type="number" id="stars" min="1" max="5" placeholder="Bewertung (1-5)">
-            <button id="submit-rating">Abgeben</button>
-            <h3>Vorherige Bewertungen</h3>
-            <div class="ratingComments">
-                <ul id="previous-ratings"></ul>
+        <imageUnderTheHeader class="mainBackground"></imageUnderTheHeader>
+        <div>
+            <div class="companyName">
+
+                <div class="nameAndLogo">
+
+                    <div class="Restaurantname">
+                        <h1>Bestellbude</h1>
+                    </div>
+                    <img src="./img/Logo-Bestellbude.jpeg" class="BestellbudeLogo">
+
+                </div>
+
+            </div>
+
+            <div id="average-rating-container" style="display: none;">
+                <h2>Durchschnittsbewertung: <span id="average-rating-stars"></span></h2>
+
+            </div>
+            <nav>
+                <a href="./index.html"><button id="rating-page-button">Zur Startseite</button></a>
+            </nav>
+
+            <div id="average-rating-container" style="display: none;">
+                <h2>Durchschnittsbewertung: <span id="average-rating-stars"></span></h2>
+            </div>
+            <div id="rating-container">
+                <h3>Bewertung abgeben</h3>
+                <input type="text" id="name" placeholder="Ihr Name">
+                <textarea id="comment" placeholder="Ihr Kommentar"></textarea>
+                <input type="number" id="stars" min="1" max="5" placeholder="Bewertung (1-5)">
+                <button id="submit-rating">Abgeben</button>
+                <h3>Vorherige Bewertungen</h3>
+                <div class="ratingComments">
+                    <ul id="previous-ratings"></ul>
+                </div>
             </div>
         </div>
-        <footer class="footer">FOOTER</footer>
-    </div>
-    <script src="bewertungen.js"></script>
-    <script src="index.html"></script>
+        <footer class="footer">
+            <p>&copy; 2025 Björn Löwedey</p>
+        </footer>
+
+        <script src="script.js"></script>
+        <script src="bewertungen.js"></script>
+
 </body>
 
 </html>

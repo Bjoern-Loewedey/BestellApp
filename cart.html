@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warenkorb</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="script.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            font-family: "Dancing Script", cursive;
+        }
+
+        .mainBackground {
+            background-image: url(./img/Pizza-background.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 200px !important;
+        }
+
+        .cart-section {
+            padding: 20px;
+            padding-bottom: 80px;
+            padding-left: 64px;
+            width: 50%;
+            height: auto;
+            min-width: 320px;
+            max-width: 640px;
+            height: 400px;
+            width: 100%;
+            max-height: calc(100vh - 160px);
+            overflow-y: auto;
+        }
+
+        .footer {
+            display: flex;
+            position: fixed;
+            justify-content: end;
+        }
+
+        .footer p {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .backHomeButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 128px;
+            margin-bottom: 32px;
+        }
+
+        .cart-section h1 {
+            margin-bottom: 16px;
+            margin-top: 16px;
+            font-size: 48px;
+        }
+    </style>
+</head>
+
+<body id="cartscreen">
+    <header class="header">
+        <div class="shopping-cart-img">
+            <div class="shopping-cart" data-href="cart.html" id="shoppingcart">
+                <img src="img/shoppingCard.jpg" alt="Einkaufswagen" />
+            </div>
+        </div>
+    </header>
+    <div class="screen">
+        <imageUnderTheHeader class="mainBackground"></imageUnderTheHeader>
+
+        <div class="sreenMediaQuery">
+
+            <div class="companyName">
+
+                <div class="nameAndLogo">
+
+                    <div class="Restaurantname">
+                        <h1>Bestellbude</h1>
+                    </div>
+                    <img src="./img/Logo-Bestellbude.jpeg" class="BestellbudeLogo">
+
+                </div>
+
+            </div>
+            <div class="backHomeButton">
+                <button id="food-button-drinks">Zurück zum Menü</button>
+            </div>
+
+            <div class="cart-section">
+                <h1>Warenkorb</h1>
+                <h3>Ihre Artikel:</h3>
+                <p>Hier befinden sich Ihre ausgewählten Artikel und stehen zur Bestellung bereit.</p>
+                <ul id="cart-list"></ul>
+            </div>
+
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-button">&times;</span>
+                    <p>Danke für Ihre Bestellung!</p>
+                </div>
+            </div>
+            <footer class="footer">
+                <p>&copy; 2025 Björn Löwedey</p>
+            </footer>
+
+            <script src="index.html"></script>
+            <script>
+                document.getElementById("food-button-drinks").addEventListener("click", function () {
+                    window.location.href = "./index.html";
+                });
+            </script>
+
+</body>
+
+</html>
