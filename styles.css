@@ -64,8 +64,7 @@ h3 {
 
 main {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: row;   
     padding: 8px;
 }
 
