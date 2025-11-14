@@ -21,8 +21,12 @@
         <div class="shopping-cart-img">
             <div class="shopping-cart" data-href="cart.html" id="shoppingcart">
                 <img src="img/shoppingCard.jpg" alt="Einkaufswagen" />
+                <span id="cart-count" class="cart-count">0</span>
+        
             </div>
+            <div class="cart-total-header" id="cart-total-header">0,00 €</div>
         </div>
+        
     </header>
 
     <div class="screen">
@@ -56,13 +60,15 @@
 
             </nav>
 
-            <main>
+            <main >
                 <div id="dishes-table-container" class="table-container-food visible"></div>
                 <div id="drink-table-container" class="table-container-food"></div>
 
                 <div class="cart-section">
                     <h3>Warenkorbinnhalt </h3>
                     <ul id="cart-list"></ul>
+                    <div class="cart-totals">
+
                 </div>
 
                 <div id="modal" class="modal">
